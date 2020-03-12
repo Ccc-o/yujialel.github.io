@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+	(function() {
+		if (''){
+			if (prompt('请输入文章密码') !== ''){
+				alert('密码错误! ');
+				history.back();
+			}
+		}
+	})();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="CmPrcVNsra" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128px.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32px.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16px.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS探索," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M了个Cの播客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="KVC (Key-Value Coding), 是利用 NSKeyValueCoding 非正式协议实现的一种机制, 对象采用这种机制来提供对其属性的间接访问。当对象采用该协议时, 可以通过简洁统一的方法来访问其属性。简单来说, 就是我们在开发中可以通过key名直接访问对象的属性, 或者对属性进行赋值操作, 而不需要去调用明确的存取方法。这样就允许我们在运行时去动态地访问和修改对象的属性, 而不">
+<meta name="keywords" content="iOS探索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS探索之--KVC 原理分析">
+<meta property="og:url" content="https:&#x2F;&#x2F;yoursite.com&#x2F;2020-02-16-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--KVC%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:site_name" content="M了个Cの播客">
+<meta property="og:description" content="KVC (Key-Value Coding), 是利用 NSKeyValueCoding 非正式协议实现的一种机制, 对象采用这种机制来提供对其属性的间接访问。当对象采用该协议时, 可以通过简洁统一的方法来访问其属性。简单来说, 就是我们在开发中可以通过key名直接访问对象的属性, 或者对属性进行赋值操作, 而不需要去调用明确的存取方法。这样就允许我们在运行时去动态地访问和修改对象的属性, 而不">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;kvc-1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;kvc-2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;kvc-3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;kvc-4.png">
+<meta property="og:updated_time" content="2020-03-12T03:35:04.123Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;kvc-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yoursite.com/2020-02-16-iOS探索之--KVC 原理分析/"/>
+
+
+
+
+
+  <title>iOS探索之--KVC 原理分析 | M了个Cの播客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?303e673e988f5d6e9f10a584a870d13a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="https://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M了个Cの播客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做更好的自己</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-留言板">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br />
+            
+            留言板
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="https://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-02-16-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--KVC%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="name" content="M了个C">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="M了个Cの播客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS探索之--KVC 原理分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-16T00:00:00+08:00">
+                2020-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS%E5%BA%95%E5%B1%82%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS底层学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020-02-16-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--KVC%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020-02-16-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--KVC%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020-02-16-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--KVC%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" class="leancloud_visitors" data-flag-title="iOS探索之--KVC 原理分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>KVC (Key-Value Coding), 是利用 <code>NSKeyValueCoding</code> 非正式协议实现的一种机制, 对象采用这种机制来提供对其属性的间接访问。当对象采用该协议时, 可以通过简洁统一的方法来访问其属性。简单来说, 就是我们在开发中可以通过key名直接访问对象的属性, 或者对属性进行赋值操作, 而不需要去调用明确的存取方法。这样就允许我们在运行时去动态地访问和修改对象的属性, 而不是在编译时决定。</p>
+</blockquote>
+<h2 id="KVC-简介"><a href="#KVC-简介" class="headerlink" title="KVC 简介"></a>KVC 简介</h2><p>通过查看API我们不难发现, KVC的定义是通过对 <code>NSObject</code> 的扩展来实现的。所以对于所有集成了 <code>NSObject</code> 的类来说都可以使用 KVC, 也就是说出去少数类型 (结构体) 以外都可以使用KVC。下面是我们经常使用到的一些方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (void)setValue:(nullable id)value forKey:(NSString *)key;&#x2F;&#x2F; 通过 key 设值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">- (nullable id)valueForKey:(NSString *)key;&#x2F;&#x2F; 通过 key 取值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">- (void)setValue:(nullable id)value forKeyPath:(NSString *)keyPath;&#x2F;&#x2F; 通过 keyPath 设值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">- (nullable id)valueForKeyPath:(NSString *)keyPath;&#x2F;&#x2F; 通过 keyPath 取值</span></pre></td></tr></table></figure>
+
+<p>NSKeyValueCoding类别的其它方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 默认为YES。 如果返回为YES,如果没有找到 set&lt;Key&gt; 方法的话, 会按照_key, _isKey, key, isKey的顺序搜索成员变量, 返回NO则不会搜索</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">+ (BOOL)accessInstanceVariablesDirectly;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 键值验证, 可以通过该方法检验键值的正确性, 然后做出相应的处理</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">- (BOOL)validateValue:(inout id _Nullable * _Nonnull)ioValue forKey:(NSString *)inKey error:(out NSError **)outError;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 如果key不存在, 并且没有搜索到和key有关的字段, 会调用此方法, 默认抛出异常。两个方法分别对应 get 和 set 的情况</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">- (nullable id)valueForUndefinedKey:(NSString *)key;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">- (void)setValue:(nullable id)value forUndefinedKey:(NSString *)key;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; setValue方法传 nil 时调用的方法</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 注意文档说明: 当且仅当 NSNumber 和 NSValue 类型时才会调用此方法 </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">- (void)setNilValueForKey:(NSString *)key;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 一组 key对应的value, 将其转成字典返回, 可用于将 Model 转成字典</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">- (NSDictionary&lt;NSString *, id&gt; *)dictionaryWithValuesForKeys:(NSArray&lt;NSString *&gt; *)keys;</span></pre></td></tr></table></figure>
+
+
+
+<h2 id="KVC-原理分析"><a href="#KVC-原理分析" class="headerlink" title="KVC 原理分析"></a>KVC 原理分析</h2><h3 id="1-KVC-设值过程"><a href="#1-KVC-设值过程" class="headerlink" title="1. KVC 设值过程"></a>1. KVC 设值过程</h3><p>当我们去调用 <code>setValue:值 forKey:名字</code> 设值方法时, 底层的执行机制大致如下:</p>
+<ol>
+<li><p>程序会去优先调用, <code>set&lt;Key&gt;: 或者 _set&lt;Key&gt;, setIs&lt;Key&gt;</code> 方法, 如果存在这些命名规则的方法, 会直接调用该方法进行赋值。<strong>调用优先顺序按照上面书写的顺序。</strong></p>
+<p><strong>说明: 这里的 “key” 指成员变量名字, 书写格式需要符合 KVC 的命名规则。</strong></p>
+</li>
+<li><p>如果没有找到步骤1的方法, 程序会回去判断 <code>+ (BOOL)accessInstanceVariablesDirectly;</code> 方法的返回值, 如果该方法返回值为NO (默认为 YES, 在我们重写该方法时有可能返回NO, 一般不会返回NO), 则会执行 <code>setValue: forUndefinedKey:</code> 方法报错。</p>
+</li>
+<li><p>如果上一步方法的返回值为YES, 程序会去查找命名方式为 <code>_&lt;key&gt;, _&lt;isKey&gt;, &lt;key&gt;, &lt;isKey&gt;</code> 形式的实例变量, 加入存在该形式的实例变量, 则会直接将我们调用方法的值赋值给该实例变量。<strong>这里的查找优先顺序也会按照书写顺序去查找。</strong></p>
+</li>
+<li><p>如果第三步没有查找到符合规则的实例变量, 程序就会去执行 <code>setValue: forUndefinedKey:</code> 方法进行报错。</p>
+</li>
+</ol>
+<p>下面是一段验证代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 声明实例变量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@interface MCPerson : NSObject &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    @public</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    NSString *_name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    NSString *name;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    NSString *_isName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    NSString *isName;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">@end</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; .m文件实现上面提到的方法进行监听</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">+ (BOOL)accessInstanceVariablesDirectly &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    return YES;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">- (void)setValue:(id)value forUndefinedKey:(nonnull NSString *)key &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;设置出现异常!!!&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">- (void)setName:(NSString *)value &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%s - %@&quot;, __func__, value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">- (void)setIsName:(NSString *)value &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%s - %@&quot;, __func__, value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">- (void)_setName:(NSString *)value &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%s - %@&quot;, __func__, value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 测试代码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    MCPerson *person &#x3D; [[MCPerson alloc] init];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    [person setValue:@&quot;person&quot; forKey:@&quot;name&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%@ - %@ - %@ - %@&quot;, person-&gt;_name, person-&gt;_isName, person-&gt;name, person-&gt;isName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%@ - %@ - %@&quot;, person-&gt;_isName, person-&gt;name, person-&gt;isName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%@ - %@&quot;, person-&gt;name, person-&gt;isName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%@&quot;, person-&gt;isName);</span></pre></td></tr></table></figure>
+
+<ol>
+<li>执行上面的代码, 查看打印信息如下:</li>
+</ol>
+<p><img src="/images/kvc-1.png" alt><br>可以看到程序执行了 <code>setName</code> 方法, 验证了上面步骤1的内容。而且我们发现三个方法中执行完第一个方法以后后面的就不会去执行了, 如果我们注释掉 <code>setName</code> 的话, 得到的结果是执行<code>_setName</code> , 由此就能得出方法的查找和执行优先顺序。</p>
+<ol start="2">
+<li>将上面的set方法注释掉, 然后 <code>accessInstanceVariablesDirectly</code> 方法的返回值改为 NO</li>
+</ol>
+<p><img src="/images/kvc-2.png" alt><br>根据打印信息发现调用了 <code>setValue: forUndefinedKey:</code> 方法抛出了异常, 下面再把返回值改为 YES。</p>
+<p><img src="/images/kvc-3.png" alt><br>可以发现我们的值被赋值给了 <code>_name</code> ,其余的三个实例变量仍然是空值, 然后试着把 <code>_name</code>注释掉就可以去一一验证实例变量的查找优先顺序了有兴趣的可以自己去验证一下。</p>
+<h3 id="2-KVC-取值过程"><a href="#2-KVC-取值过程" class="headerlink" title="2. KVC 取值过程"></a>2. KVC 取值过程</h3><ol>
+<li><p>首先按照 <code>get&lt;Key&gt;, &lt;key&gt;, is&lt;Key&gt;, _&lt;key&gt;</code> 的顺序查找方法, 如果找到方法, 执行找到的方法得到返回值, 返回值的判断跳到第5步; 如果没有查找到方法, 进行下一步</p>
+</li>
+<li><p>如果没有找到上面的方法, KVC 就会去继续查找 <code>countOf&lt;Key&gt;, objectIn&lt;Key&gt;AtIndex: (对应NSArray的方法), &lt;key&gt;AtIndexes: (对应NSArray 的 objectsAtIndexes: 方法)</code> 格式的方法, 如果找到 <code>countOf&lt;Key&gt;</code> 和 另外两个方法中的一个, 就会返回一个可以响应所有NSArray方法的代理集合对象。当该代理集合对象接收到 NSArray 的方法调用时, 会去转换为对 <code>countOf&lt;Key&gt;, objectIn&lt;Key&gt;AtIndex 或 &lt;Key&gt;AtIndexes</code> 这几个方法的调用 (此外还有一个可选方法格式为 <code>get&lt;Key&gt;:range</code> )。(<strong>注意: 该类为<code>NSKeyValueArray</code> , 是NSArray的子类</strong>)</p>
+</li>
+<li><p>如果第2步仍然没有找到, 就会继续去查找 <code>countOf&lt;Key&gt;, enumeratorOf&lt;Key&gt;, 和 memberOf&lt;Key&gt;: (对应NSSet的方法)</code> 格式的方法, 如果这三种格式的方法都找到, 就会返回一个响应所有NSSet方法的代理集合对象, 反之则进行第4步。该集合对象会将接收到的NSSet方法调用转换为对 <code>countOf&lt;Key&gt;, enumeratorOf&lt;Key&gt;, 和 memberOf&lt;Key&gt;:</code> 方法的调用。</p>
+</li>
+<li><p>如果没有找到任何符合要求的方法, 然后 <code>accessInstanceVariablesDirectly</code> 的返回值为YES, 会像上面的设值过程一样去查询实例变量 <code>_&lt;key&gt;, _&lt;isKey&gt;, &lt;key&gt;,</code> , 如果查询到符合条件的实例变量, 会直接取出实例变量的值, 然后进行第5步。反之, 直接到第6步。</p>
+</li>
+<li><p>如果第4步获取到的属性值是一个对象指针, 直接返回结果; 如果该值是 NSNumber 支持的标量类型, 将其存储为 NSNumber类型的实例然后返回; 如果该值不是 NSNumber 支持的标量类型, 将其转换为 NSValue对象然后返回。</p>
+</li>
+<li><p>调用 <code>valueForUndefinedKey:</code> 方法进行报错。</p>
+</li>
+</ol>
+<p>下面是关于取值过程的代码验证:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic,strong) NSArray *array;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic,strong) NSSet *set;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic,strong) NSMutableString *arrayM;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic,strong) NSMutableSet *setM;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic,strong) NSMutableOrderedSet *orderSetM;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">- (id)valueForUndefinedKey:(NSString *)key &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;取值出现异常!!!&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    return key;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">- (NSString *)getName &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    return NSStringFromSelector(_cmd);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">- (NSString *)name &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    return NSStringFromSelector(_cmd);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">- (NSString *)isName &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    return NSStringFromSelector(_cmd);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">- (NSString *)_name &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    return NSStringFromSelector(_cmd);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">#pragma - NSArray -</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">- (NSUInteger)countOfPens &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;- %s -&quot;, __func__);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    return [self.array count];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">- (id)objectInPensAtIndex:(NSUInteger)index &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;- %s -&quot;, __func__);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    return self.array[index];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">#pragma - NSSet -</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">- (NSUInteger)countOfBooks &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;- %s -&quot;, __func__);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    return [self.set count];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">- (NSEnumerator *)enumeratorOfBooks &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;- %s -&quot;, __func__);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">    return [self.set objectEnumerator];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">- (NSString *)memberOfBooks:(NSString *)object &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;- %s -&quot;, __func__);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">    return [self.set containsObject:object] ? object : nil;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 验证代码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">    person-&gt;_name &#x3D; @&quot;我是 _name&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    person-&gt;name &#x3D; @&quot;我是 name&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">    person-&gt;isName &#x3D; @&quot;我是 isName&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">    person-&gt;_isName &#x3D; @&quot;我是 _isName&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;***** %@&quot;, [person valueForKey:@&quot;name&quot;]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">    person.array &#x3D; @[@&quot;pen0&quot;, @&quot;pen1&quot;, @&quot;pen2&quot;, @&quot;pen3&quot;, @&quot;pen4&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">    NSArray *array &#x3D; [person valueForKey:@&quot;pens&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;%@&quot;, [array objectAtIndex:1]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;数量 %ld&quot;, [array count]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;是否存在该值 %d&quot;, [array containsObject:@&quot;pen2&quot;]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">    person.set &#x3D; [NSSet setWithArray:person.array];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">    NSSet *set &#x3D; [person valueForKey:@&quot;books&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">    [set enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line">        NSLog(@&quot;遍历set: %@&quot;, obj);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line">    &#125;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;是否存在该值 %d&quot;, [set containsObject:@&quot;pen2&quot;]);</span></pre></td></tr></table></figure>
+
+
+<p>打印结果:<br><img src="/images/kvc-4.png" alt><br>通过上面的代码可以去检索KVC在 <code>valueForKey:@&quot;name&quot;</code> 是的查询机制, 这里不再一一列出, 有兴趣的可以自己去一一验证。</p>
+<h3 id="3-KVC-与-容器类"><a href="#3-KVC-与-容器类" class="headerlink" title="3. KVC 与 容器类"></a>3. KVC 与 容器类</h3><p>我们知道对象的属性既可以是一对一的, 也可以是一对多的。可以是有序的数组, 也可以是无序的集合。当对象属性是可变容器时, 苹果给我们提供了下面的方法:</p>
+<h4 id="1-有序的"><a href="#1-有序的" class="headerlink" title="1. 有序的"></a>1. 有序的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (NSMutableArray *)mutableArrayValueForKey:(NSString *)key;</span></pre></td></tr></table></figure>
+
+<p>该方法返回一个可变的有序数组, 当调用该方法时KVC的搜索顺序是这样的:</p>
+<ul>
+<li><p>首先搜索 <code>insertObject:in&lt;Key&gt;AtIndex: 和 removeObjectFrom&lt;Key&gt;AtIndex:</code> 方法 (对应<code>NSMutableArray</code> 的 <code>insertObject:atIndex: 和 removeObjectAtIndex:</code> 方法), 或者<code>insert&lt;Key&gt;:atIndexes: 和 remove&lt;Key&gt;AtIndexes:</code> (对应<code>NSMutableArray</code>的<code>insertObjects:atIndexes: 和 removeObjectsAtIndexes:</code> 方法)。如果至少找到一个 insert方法和一个remove方法,就会返回一个可以相应NSMutableArray所有方法的代理集合, 当该代理集合对象接收到 NSMutableArray 的方法调用时, 会去转换为对 <code>insertObject:inAtIndex:</code> , <code>removeObjectFromAtIndex:</code> 或者 <code>insertAdIndexes</code> , <code>removeAtIndexes</code>组合的形式调用 (此外还有两个可选的方法<code>replaceOnjectAtIndex:withObject:, replaceAtIndexes:with:</code>) 。</p>
+</li>
+<li><p>如果上面的条件没有成立, 会继续搜索格式为 <code>set&lt;Key&gt;</code> 的方法, 如果找到, 那么代理集合对象接收到的NSMutableArray方法调用都会去调用<code>set&lt;Key&gt;</code>方法。就是说, 取出的代理集合如果被修改后, 都会通过调用 <code>set&lt;Key&gt;</code> 方法重新赋值回去, 这样做的话大大降低了效率。(所以尽量实现上面的方法)</p>
+</li>
+<li><p>如果上一步的方法还是没有找到, 会去检查 <code>accessInstanceVariablesDirectly</code> 的返回值, 为YES, 会按照 <code>_&lt;key&gt;, &lt;key&gt;</code> 的顺序去搜索实例变量, 如果找到的话, 代理集合接收到的NSMutableArray消息直接交给这个实例变量处理。</p>
+</li>
+<li><p>如果仍然没有结果, 调用 <code>valueForUndefinedKey:</code>。</p>
+</li>
+<li><p>关于 <code>mutableArrayValueForKey</code> 的用法, 网上只找到了关于<code>NSMutableArray</code> 添加观察者时。如果对象的属性是 <code>NSMutableArray、NSMutableSet、NSMutableDictionary</code> 等集合类型时, 如果我们对其添加KVO, 会发现当添加或者移除元素时并不能接收到变化。因为KVO是在系统检测到某个属性的内存地址或者常量发生改变时, 才会去发送通知。一种方法是我们去手动调用方法通知对象的改变, 但是并不推荐, 因为我们无法像系统一样准确的知道其改变。另外一种就是利用 <code>mutableArrayValueForKey</code> :</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">@interface MCStudent ()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic,strong) NSMutableArray *arr;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">@end</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">- (instancetype)init &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    if (self &#x3D; [super init]) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        _arr &#x3D; [NSMutableArray array];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        [self addObserver:self forKeyPath:@&quot;arr&quot; options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    return self;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;change: %@&quot;, change);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">- (void)dealloc &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    [self removeObserver:self forKeyPath:@&quot;arr&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">- (void)addItem&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    [_arr addObject:@&quot;1&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">- (void)addItemObserver&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    [[self mutableArrayValueForKey:@&quot;arr&quot;] addObject:@&quot;1&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">- (void)removeItemObserver&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    [[self mutableArrayValueForKey:@&quot;arr&quot;] removeLastObject];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 测试代码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    [student addItem];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    [student addItemObserver];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    [student removeItemObserver];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 打印结果如下</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">2020-02-16 16:16:21.315056+0800 002-KVC取值&amp;赋值过程[2281:1547198] change: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    indexes &#x3D; &quot;&lt;_NSCachedIndexSet: 0x60000107edc0&gt;[number of indexes: 1 (in 1 ranges), indexes: (1)]&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">    kind &#x3D; 2;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    new &#x3D;     (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">2020-02-16 16:16:21.315270+0800 002-KVC取值&amp;赋值过程[2281:1547198] change: &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    indexes &#x3D; &quot;&lt;_NSCachedIndexSet: 0x60000107edc0&gt;[number of indexes: 1 (in 1 ranges), indexes: (1)]&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    kind &#x3D; 3;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    old &#x3D;     (</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    );</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>从上面的代码可以看出, 当我们按照通常的方式去给数组添加对象时, 并没有触发KVO的监听方法, 只有通过 <code>mutableArrayValueForKey</code> 方法拿到数组然后再去进行添加/移除时才会触发KVO。</p>
+<h4 id="2-无序的"><a href="#2-无序的" class="headerlink" title="2. 无序的"></a>2. 无序的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (NSMutableSet *)mutableSetValueForKey:(NSString *)key;</span></pre></td></tr></table></figure>
+
+<p>该方法返回一个可变的无序数组, KVC搜索顺序如下:</p>
+<ul>
+<li>首先会去查询 <code>addObject&lt;Key&gt;Object: , remove&lt;Key&gt;Object: 或者 add&lt;Key&gt;: , remove&lt;Key&gt;:</code>, 如果至少找到一个 insert和一个remove方法, 就会返回一个可以响应NSMutableSet所有方法的代理集合, 当该代理集合对象接收到 NSMutableSet 的方法调用时, 会去转换为对 <code>addObject&lt;Key&gt;Object: , remove&lt;Key&gt;Object: 或者 add&lt;Key&gt;:, remove&lt;Key&gt;:</code>组合的形式调用 (此外还有两个可选的方法<code>replaceOnjectAtIndex:withObject:, replaceAtIndexes:with:</code>) 。</li>
+<li>如果 receiver 是 managed object, 那么就不会继续搜索 (See Managed Object Accessor Methods in <em><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/index.html#//apple_ref/doc/uid/TP40001075" target="_blank" rel="noopener">Core Data Programming Guide</a></em> for more information) 。</li>
+<li>如果上一步的方法没有找到，则搜索<code>set&lt;Key&gt;:</code> 格式的方法，如果找到，那么发送给代理集合的 <code>NSMutableSet</code> 方法最终都会调用<code>set&lt;Key&gt;:</code>方法。 也就是说，<code>mutableSetValueForKey</code> 取出的代理集合修改后，用<code>set&lt;Key&gt;:</code> 重新赋值回去。这样做效率会低很多。所以推荐实现上面的方法。</li>
+<li>如果上一步的方法还是没有找到, 会去检查 <code>accessInstanceVariablesDirectly</code> 的返回值, 为YES, 会按照 <code>_&lt;key&gt;, &lt;key&gt;</code> 的顺序去搜索实例变量, 如果找到的话, 代理集合接收到的NSMutableSet 消息直接交给这个实例变量处理。</li>
+<li>如果仍然没有结果, 调用 <code>valueForUndefinedKey:</code>。</li>
+</ul>
+<h3 id="4-KVC-与-字典"><a href="#4-KVC-与-字典" class="headerlink" title="4. KVC 与 字典"></a>4. KVC 与 字典</h3><p>当对字典对象使用KVC时, KVC给我们提供了下面两个方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (NSDictionary&lt;NSString *, id&gt; *)dictionaryWithValuesForKeys:(NSArray&lt;NSString *&gt; *)keys;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">- (void)setValuesForKeysWithDictionary:(NSDictionary&lt;NSString *, id&gt; *)keyedValues;</span></pre></td></tr></table></figure>
+
+<p><code>dictionaryWithValuesForKeys:</code> 该方法接收一组key, 然后将该组key对应的属性封装成一个字典返回。</p>
+<p><code>setValuesForKeysWithDictionary:</code> 通过一个字典来修改对应key的值。</p>
+<h2 id="KVC-的使用注意事项"><a href="#KVC-的使用注意事项" class="headerlink" title="KVC 的使用注意事项"></a>KVC 的使用注意事项</h2><h3 id="1-在KVC中使用-keyPath"><a href="#1-在KVC中使用-keyPath" class="headerlink" title="1. 在KVC中使用 keyPath"></a>1. 在KVC中使用 keyPath</h3><p>在实际过程中, 一个类的成员变量有可能是自定义的类或者其他的复杂类型, 这时候如果想要使用KVC获取到自定义类的属性就会比较麻烦。这时KVC给我们提供了一个解决方案, 键路径 <code>keyPath</code>。方法如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (nullable id)valueForKeyPath:(NSString *)keyPath;  &#x2F;&#x2F;通过KeyPath来取值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">- (void)setValue:(nullable id)value forKeyPath:(NSString *)keyPath;  &#x2F;&#x2F;通过KeyPath来设值</span></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">MCStudent *student &#x3D; [[MCStudent alloc] init];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">student.classNumber &#x3D; @&quot;num1&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">student.number &#x3D; @&quot;007&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">person.student &#x3D; student;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;classNum: %@&quot;, [personvalueForKeyPath:@&quot;student.classNumber&quot;]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 打印结果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">2020-02-16 13:27:08.482381+0800 002-KVC取值&amp;赋值过程[96366:1435734] classNum: num1</span></pre></td></tr></table></figure>
+
+<p>上面展示<code>keyPath</code>的简单用法, 此时如果我们调用的方法是 <code>valueForKey:</code> 的话, 一般情况下系统会去调用<code>undefinedKey</code>方法, 因为没有找到这个属性及其相关的方法和实例变量。KVC在此方法中的搜索机制首先根据 “ . “ 来分割key, 然后在去按照上面的顺序去搜索下去。</p>
+<h3 id="2-KVC-的自动转换"><a href="#2-KVC-的自动转换" class="headerlink" title="2. KVC 的自动转换"></a>2. KVC 的自动转换</h3><p>我们进行设值或者取值的时候, 不是每次都是对象类型, 但是在 <code>valueForKey: 和 setValue: forKey:</code> 时总是需要或者返回一个id对象类型。看一下下面的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">typedef struct &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    float x, y, z;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125; ThreeFloats;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic, copy) NSString *subject;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic, assign) int  age;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic, assign) BOOL sex;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic) ThreeFloats  threeFloats;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  [person setValue:@18 forKey:@&quot;age&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 上面那个表达 大家应该都会! 但是下面这样操作可以?</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  [person setValue:@&quot;20&quot; forKey:@&quot;age&quot;]; &#x2F;&#x2F; int - string</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  NSLog(@&quot;%@-%@&quot;,[person valueForKey:@&quot;age&quot;],[[person valueForKey:@&quot;age&quot;] class]);&#x2F;&#x2F;__NSCFNumber</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  [person setValue:@&quot;20&quot; forKey:@&quot;sex&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  NSLog(@&quot;%@-%@&quot;,[person valueForKey:@&quot;sex&quot;],[[person valueForKey:@&quot;sex&quot;] class]);&#x2F;&#x2F;__NSCFNumber</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 打印结果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">2020-02-16 14:40:31.263662+0800 004-KVC异常小技巧[98873:1483589] 20-__NSCFNumber</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">2020-02-16 14:40:33.829650+0800 004-KVC异常小技巧[98873:1483589] 1-__NSCFBoolean</span></pre></td></tr></table></figure>
+
+<p>如果原本的变量类型是值类型或者布尔类型, 我们直接以字符串进行赋值以后, 得出的结果为 <code>__NSCFNumber 和__NSCFBoolean</code> 类型, 说明在我们进行setValue 和 getValue操作时, 系统帮我们进行了自动转换。那么当变量类型是结构体类型的时候呢, 此时我们是无法再去直接使用字符串赋值的, 需要我们将其转换为 <code>NSValue</code>类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 赋值操作</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">ThreeFloats floats &#x3D; &#123;1., 2., 3.&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">NSValue *value  &#x3D; [NSValue valueWithBytes:&amp;floats objCType:@encode(ThreeFloats)];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">[person setValue:value forKey:@&quot;threeFloats&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">NSValue *reslut &#x3D; [person valueForKey:@&quot;threeFloats&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;%@&quot;,reslut);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;%@-%@&quot;,[person valueForKey:@&quot;threeFloats&quot;],[[person valueForKey:@&quot;threeFloats&quot;] class]);&#x2F;&#x2F;NSConcreteValue</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 取值操作</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">ThreeFloats th;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">[reslut getValue:&amp;th] ;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;%f - %f - %f&quot;,th.x,th.y,th.z);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 打印结果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">2020-02-16 15:05:00.494832+0800 004-KVC异常小技巧[99701:1501772] &#123;length &#x3D; 12, bytes &#x3D; 0x0000803f0000004000004040&#125;-NSConcreteValue</span></pre></td></tr></table></figure>
+
+<p>通过打印结果可以看出, 转换成 NSValue 类型以后赋值成功了, 然后如果我们需要使用 <code>valueForKey</code> 取值时, 同样取出的也是 NSValue 类型的值, 此时需要进行如上面样将其转换为结构体然后进行使用。所以当我们进行KVC设值和取值操作时, 因为我们传递进去和取出来的都是id类型的值, 有时候需要我们自己去保证类型的正确性。</p>
+<h3 id="3-KVC-异常处理"><a href="#3-KVC-异常处理" class="headerlink" title="3. KVC 异常处理"></a>3. KVC 异常处理</h3><p>这一点需要结合上面的第2点进行说明, 我们知道KVC有时候会帮我们去自动转换我们所传的值, 但是当我们传 nil 的时候KVC是怎么处理的呢。下面看一段代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (void)setNilValueForKey:(NSString *)key;</span></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (void)setNilValueForKey:(NSString *)key&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    NSLog(@&quot;你傻不傻: 设置 %@ 是空值&quot;,key);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic, copy) NSString *subject;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic, assign) int  age;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic, assign) BOOL sex;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">@property (nonatomic) ThreeFloats  threeFloats;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 测试代码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  NSLog(@&quot;******2: 设置空值******&quot;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  [person setValue:nil forKey:@&quot;age&quot;]; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  [person setValue:nil forKey:@&quot;subject&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  [person setValue:nil forKey:@&quot;sex&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  [person setValue:nil forKey:@&quot;threeFloats&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 打印结果</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">2020-02-16 16:58:44.538117+0800 004-KVC异常小技巧[3703:1577245] ******2: 设置空值******</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">2020-02-16 16:58:44.538200+0800 004-KVC异常小技巧[3703:1577245] 你傻不傻: 设置 age 是空值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">2020-02-16 16:58:44.538293+0800 004-KVC异常小技巧[3703:1577245] 你傻不傻: 设置 sex 是空值</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">2020-02-16 16:58:44.538487+0800 004-KVC异常小技巧[3703:1577245] 你傻不傻: 设置 threeFloats 是空值</span></pre></td></tr></table></figure>
+
+<p>可以看出给subject设置空值时, 不会走该方法, 其余三个进行 nil 赋值时都会调用该方法抛出异常。官方文档上面说明的是针对需要转换为 <code>NSNumber 和 NSValue</code> 类型的数据赋值 nil 时会抛出异常, 所以 当我们给 <code>NSString</code> 类型的subject进行赋值时并没有报错。</p>
+<h3 id="4-KVC-正确性验证"><a href="#4-KVC-正确性验证" class="headerlink" title="4. KVC 正确性验证"></a>4. KVC 正确性验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (BOOL)validateValue:(inout id __nullable * __nonnull)ioValue forKey:(NSString *)inKey error:(out NSError **)outError;</span></pre></td></tr></table></figure>
+
+<p>该方法默认返回YES, 如果类中实现了该方法, 那么就会去调用新实现的方法来返回。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- (BOOL)validateValue:(inout id  _Nullable __autoreleasing *)ioValue forKey:(NSString *)inKey error:(out NSError *__autoreleasing  _Nullable *)outError&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    if([inKey isEqualToString:@&quot;name&quot;])&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        [self setValue:[NSString stringWithFormat:@&quot;里面修改一下: %@&quot;,*ioValue] forKey:inKey];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        return YES;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    *outError &#x3D; [[NSError alloc]initWithDomain:[NSString stringWithFormat:@&quot;%@ 不是 %@ 的属性&quot;,inKey,self] code:10088 userInfo:nil];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    return NO;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>如上所示, 我们可以在该方法里面去验证某个key是否允许通过KVC去设定, 然后进行相关处理和返回。(注意: KVC是不会去主动验证的, 需要我们在该方法里面去实现验证。)</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要是KVC的一些原理和一些需要注意的点, 所有的东西都是通过阅读官方的文档和自己结合官方文档的一些理解。希望读者在看完后能对KVC有更进一步的理解, 同时推荐你们去看一下官方文档上的详细说明。如果有不对的地方或者不合理的地方欢迎大佬们提出, 我们一起学习, 一起进步。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    M了个C
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yoursite.com/2020-02-16-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--KVC%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" title="iOS探索之--KVC 原理分析">https://yoursite.com/2020-02-16-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--KVC%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS%E6%8E%A2%E7%B4%A2/" rel="tag"><i class="fa fa-tag"></i> iOS探索</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019-12-24-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--alloc%E3%80%81init%20%E4%B8%8E%20new/" rel="next" title="iOS探索之--alloc、init 与 new">
+                <i class="fa fa-chevron-left"></i> iOS探索之--alloc、init 与 new
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020-02-19-iOS%E6%8E%A2%E7%B4%A2%E4%B9%8B--%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" rel="prev" title="iOS探索之--内存对齐原理分析">
+                iOS探索之--内存对齐原理分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="M了个C" />
+            
+              <p class="site-author-name" itemprop="name">M了个C</p>
+              <p class="site-description motion-element" itemprop="description">Be a better yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yujialel" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:745076972@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/dujiaoxi/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/6067369472/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KVC-简介"><span class="nav-number">1.</span> <span class="nav-text">KVC 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVC-原理分析"><span class="nav-number">2.</span> <span class="nav-text">KVC 原理分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-KVC-设值过程"><span class="nav-number">2.1.</span> <span class="nav-text">1. KVC 设值过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-KVC-取值过程"><span class="nav-number">2.2.</span> <span class="nav-text">2. KVC 取值过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-KVC-与-容器类"><span class="nav-number">2.3.</span> <span class="nav-text">3. KVC 与 容器类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-有序的"><span class="nav-number">2.3.1.</span> <span class="nav-text">1. 有序的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-无序的"><span class="nav-number">2.3.2.</span> <span class="nav-text">2. 无序的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-KVC-与-字典"><span class="nav-number">2.4.</span> <span class="nav-text">4. KVC 与 字典</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVC-的使用注意事项"><span class="nav-number">3.</span> <span class="nav-text">KVC 的使用注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在KVC中使用-keyPath"><span class="nav-number">3.1.</span> <span class="nav-text">1. 在KVC中使用 keyPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-KVC-的自动转换"><span class="nav-number">3.2.</span> <span class="nav-text">2. KVC 的自动转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-KVC-异常处理"><span class="nav-number">3.3.</span> <span class="nav-text">3. KVC 异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-KVC-正确性验证"><span class="nav-number">3.4.</span> <span class="nav-text">4. KVC 正确性验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M了个C</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">35.9k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'k0PQsHs5LYiEDkcfX3Qik9sq-9Nh9j0Va',
+        appKey: 'N6Xx5wyp4GNqrWpKuq1q58lf',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("k0PQsHs5LYiEDkcfX3Qik9sq-9Nh9j0Va", "N6Xx5wyp4GNqrWpKuq1q58lf");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
