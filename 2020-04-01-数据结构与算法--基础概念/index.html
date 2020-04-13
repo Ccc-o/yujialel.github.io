@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+	(function() {
+		if (''){
+			if (prompt('请输入文章密码') !== ''){
+				alert('密码错误! ');
+				history.back();
+			}
+		}
+	})();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="CmPrcVNsra" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128px.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32px.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16px.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="M了个Cの播客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="数据结构定义1. 基本概念数据结构是计算机存储、组织数据的方式, 是指相互之间存在一种或多种特定关系的数据元素的集合。它研究的是数据的 逻辑结构 和 物理结构 以及他们之间的相互关系, 并对这种结构定义相应的运算, 设计出相应的算法, 所以数据结构和算法也是不可分割的。 2. 相关术语数据结构中常见的几个概念, 先放一张偷来的图:    数据  描述客观事物的符号, 能够被计算机识别, 是计算机中">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法--基础概念">
+<meta property="og:url" content="https:&#x2F;&#x2F;yoursite.com&#x2F;2020-04-01-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5&#x2F;index.html">
+<meta property="og:site_name" content="M了个Cの播客">
+<meta property="og:description" content="数据结构定义1. 基本概念数据结构是计算机存储、组织数据的方式, 是指相互之间存在一种或多种特定关系的数据元素的集合。它研究的是数据的 逻辑结构 和 物理结构 以及他们之间的相互关系, 并对这种结构定义相应的运算, 设计出相应的算法, 所以数据结构和算法也是不可分割的。 2. 相关术语数据结构中常见的几个概念, 先放一张偷来的图:    数据  描述客观事物的符号, 能够被计算机识别, 是计算机中">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-7.png">
+<meta property="og:updated_time" content="2020-04-11T10:13:43.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;基本概念-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yoursite.com/2020-04-01-数据结构与算法--基础概念/"/>
+
+
+
+
+
+  <title>数据结构与算法--基础概念 | M了个Cの播客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?303e673e988f5d6e9f10a584a870d13a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="https://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="https://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">M了个Cの播客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">做更好的自己</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-留言板">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br />
+            
+            留言板
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="https://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-04-01-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="name" content="M了个C">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="M了个Cの播客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法--基础概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-01T00:00:00+08:00">
+                2020-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020-04-01-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020-04-01-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020-04-01-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="leancloud_visitors" data-flag-title="数据结构与算法--基础概念">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><h4 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h4><p>数据结构是计算机存储、组织数据的方式, 是指相互之间存在一种或多种特定关系的数据元素的集合。它研究的是数据的 <code>逻辑结构</code> 和 <code>物理结构</code> 以及他们之间的相互关系, 并对这种结构定义相应的运算, 设计出相应的算法, 所以数据结构和算法也是不可分割的。</p>
+<h4 id="2-相关术语"><a href="#2-相关术语" class="headerlink" title="2. 相关术语"></a>2. 相关术语</h4><p>数据结构中常见的几个概念, 先放一张偷来的图:</p>
+<img src="/images/基本概念-1.png" style="zoom:50%;">
+
+<ul>
+<li><strong>数据</strong></li>
+</ul>
+<p>描述客观事物的符号, 能够被计算机识别, 是计算机中可以操作的对象。包括 整型、浮点型等数值类型, 也包括 字符、声音、视频等非数值类型。</p>
+<ul>
+<li><strong>数据项</strong></li>
+</ul>
+<p>数据不可分割的最小标识单位, 用来组成数据元素。数据线通常不具有完整确定的实际意义, 或不被当做一个整体对待, 数据项又被成为 <em>字段或域</em>。</p>
+<ul>
+<li><strong>数据元素</strong></li>
+</ul>
+<p>数据元素是数据的基本单位, 在程序中作为一个整体考虑和处理, 是运算的基本单位。通常具有完整的实际意义, 又被成为 <em>元素、结点、顶点或记录</em>。</p>
+<ul>
+<li><strong>数据对象</strong></li>
+</ul>
+<p>具有相同性质的数据元素的集合, 是数据的子集。</p>
+<blockquote>
+<p>性质相同: 指数据元素具有相同数量和类型的数据项, 类似数组中的元素保持性质一致。</p>
+</blockquote>
+<p>下面通过两个表格来通俗的理解一下上面的概念:</p>
+<table>
+<thead>
+<tr>
+<th align="center">姓名</th>
+<th align="center">性别</th>
+<th align="center">身高(cm)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">李磊</td>
+<td align="center">男</td>
+<td align="center">180</td>
+</tr>
+<tr>
+<td align="center">韩梅梅</td>
+<td align="center">女</td>
+<td align="center">260</td>
+</tr>
+</tbody></table>
+<center>表 A</center>
+| 课程编号 | 课程名 |
+| :------: | :----: |
+|   1001   |  语文  |
+|   1002   |  数学  |
+
+<center>表 B</center>
+1. 上面我们定义了两张表, 表A为人员表, 表B为课程表, 这两张表就是 **数据**
+
+<ol start="2">
+<li>单独的一张表的话, 就是我们说的 <strong>数据对象</strong></li>
+<li>每张表的每一行就称为 <strong>数据元素</strong></li>
+<li>组成 <strong>数据元素</strong> 的部分, 比如姓名, 性别, 身高等, 这些称为 <strong>数据项</strong></li>
+</ol>
+<h3 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h3><p>逻辑结构指的是<strong>数据元素之间的相互关系</strong> 。根据相互关系的不同, 逻辑结构分为四种类型: 集合结构, 线性结构, 树形结构, 图形结构。</p>
+<h4 id="1-集合结构"><a href="#1-集合结构" class="headerlink" title="1. 集合结构"></a>1. 集合结构</h4><img src="/images/基本概念-2.png" style="zoom:50%;">
+
+<p>数据元素同属于一个集合, 之间没有任何其他联系, 各个元素之间都是平等的。</p>
+<h4 id="2-线性结构"><a href="#2-线性结构" class="headerlink" title="2. 线性结构"></a>2. 线性结构</h4><img src="/images/基本概念-3.png" style="zoom:50%;">
+
+<p>线性结构中的数据元素之间是 <strong>一对一的关系</strong>, 常见的线性结构有: 线性表, 栈, 队列, 数组等。</p>
+<h4 id="3-树形结构"><a href="#3-树形结构" class="headerlink" title="3. 树形结构"></a>3. 树形结构</h4><img src="/images/基本概念-4.png" style="zoom:50%;">
+
+<p>树形结构可以表示数据元素之间 <strong>一对多的关系</strong> , 是很重要的 <strong>非线性数据结构</strong>。常见的树形结构有: 二叉树, B树, 红黑树等。</p>
+<h4 id="4-图形结构"><a href="#4-图形结构" class="headerlink" title="4. 图形结构"></a>4. 图形结构</h4><img src="/images/基本概念-5.png" style="zoom:50%;">
+
+<p>图形结构数据元素是 <strong>多对多的关系</strong> 。常见的图形结构有: 邻近矩阵等。</p>
+<h3 id="物理结构"><a href="#物理结构" class="headerlink" title="物理结构"></a>物理结构</h3><p>物理结构 (又称”存储结构”), 指的是<strong>数据的逻辑结构在计算机中的存储形式</strong>。存储形式主要有2种: 顺序存储 和 链式存储。</p>
+<h4 id="1-顺序存储结构"><a href="#1-顺序存储结构" class="headerlink" title="1. 顺序存储结构"></a>1. 顺序存储结构</h4><img src="/images/基本概念-6.png" style="zoom:50%;">
+
+<p>顺序存储结构是把数据元素放到地址连续的存储单元里面, 数据之间的逻辑关系和物理关系是一致的。个人理解顺序就是指相邻数据元素之间的地址连续, 类似于排队一样。</p>
+<p>顺序存储结构就像我们生活中排队一样, 假如中间有人插队或者有人离队的话, 整个结构都需要发生变化, 这时候就需要引入链式存储结构了。</p>
+<h4 id="2-链式存储结构"><a href="#2-链式存储结构" class="headerlink" title="2. 链式存储结构"></a>2. 链式存储结构</h4><img src="/images/基本概念-7.png" style="zoom:50%;">
+
+<p>链式存储结构把数据元素放在任意的存储单元里, 这些存储单元可以是连续的, 也可以是不连续的。数据元素的存储关系并不能反映逻辑关系, 因此这里引入了指针, 用一个指针存放数据元素的地址, 这样通过地址就可以找到相关联数据元素的位置。</p>
+<p>很显然链式结构比较灵活, 数据存储位置不重要, 只要指针存放了相应的地址, 就可以通过指针找到相邻元素了。从这一点也能看到 <strong>顺序存储结构</strong> 和 <strong>链式存储结构</strong> 最大的区别就是链式存储结构引进了指针的概念，通过指针来存储地址，从而通过地址来寻找相邻元素。</p>
+<h3 id="常用的数据结构"><a href="#常用的数据结构" class="headerlink" title="常用的数据结构"></a>常用的数据结构</h3><p><a href="https://baike.baidu.com/item/数据结构/1450?fr=aladdin" target="_blank" rel="noopener">注意: 这里的内容来自百度百科, 详细内容可以去这里看一下</a></p>
+<ul>
+<li><strong>数组 (Array)</strong></li>
+</ul>
+<p><a href="https://baike.baidu.com/item/数组/3794097" target="_blank" rel="noopener">数组</a>是一种聚合数据类型，它是将具有相同类型的若干变量有序地组织在一起的集合。数组可以说是最基本的数据结构，在各种编程语言中都有对应。一个数组可以分解为多个数组元素，按照数据元素的类型，数组可以分为整型数组、字符型数组、浮点型数组、指针数组和结构数组等。数组还可以有一维、二维以及多维等表现形式。</p>
+<ul>
+<li><strong>栈 (Stack)</strong></li>
+</ul>
+<p><a href="https://baike.baidu.com/item/栈/12808149" target="_blank" rel="noopener">栈</a>是一种特殊的<a href="https://baike.baidu.com/item/线性表/3228081" target="_blank" rel="noopener">线性表</a>，它只能在一个表的一个固定端进行数据结点的插入和删除操作。栈按照后进先出的原则来存储数据，也就是说，先插入的数据将被压入栈底，最后插入的数据在栈顶，读出数据时，从栈顶开始逐个读出。栈在汇编语言程序中，经常用于重要数据的现场保护。栈中没有数据时，称为空栈。</p>
+<ul>
+<li><strong>队列 (Queue)</strong></li>
+</ul>
+<p><a href="https://baike.baidu.com/item/队列/14580481" target="_blank" rel="noopener">队列</a>和栈类似，也是一种特殊的线性表。和栈不同的是，队列只允许在表的一端进行插入操作，而在另一端进行删除操作。一般来说，进行插入操作的一端称为队尾，进行删除操作的一端称为队头。队列中没有元素时，称为空队列。</p>
+<ul>
+<li><strong>链表 (Linked List)</strong></li>
+</ul>
+<p><a href="https://baike.baidu.com/item/链表/9794473" target="_blank" rel="noopener">链表</a>是一种数据元素按照链式存储结构进行存储的数据结构，这种存储结构具有在物理上存在非连续的特点。链表由一系列数据结点构成，每个数据结点包括数据域和指针域两部分。其中，指针域保存了数据结构中下一个元素存放的地址。链表结构中数据元素的逻辑顺序是通过链表中的指针链接次序来实现的。</p>
+<ul>
+<li><strong>树 (Tree)</strong></li>
+</ul>
+<p><a href="https://baike.baidu.com/item/树/2699484" target="_blank" rel="noopener">树</a>是典型的非线性结构，它是包括，2个结点的有穷集合K。在树结构中，有且仅有一个根结点，该结点没有前驱结点。在树结构中的其他结点都有且仅有一个前驱结点，而且可以有两个后继结点，m≥0。</p>
+<ul>
+<li><strong>图 (Graph)</strong></li>
+</ul>
+<p><a href="https://baike.baidu.com/item/图/13018767" target="_blank" rel="noopener">图</a>是另一种非线性数据结构。在图结构中，数据结点一般称为顶点，而边是顶点的有序偶对。如果两个顶点之间存在一条边，那么就表示这两个顶点具有相邻关系。</p>
+<ul>
+<li><strong>堆 (Heap)</strong></li>
+</ul>
+<p><a href="https://baike.baidu.com/item/堆/20606834" target="_blank" rel="noopener">堆</a>是一种特殊的树形数据结构，一般讨论的堆都是二叉堆。堆的特点是根结点的值是所有结点中最小的或者最大的，并且根结点的两个子树也是一个堆结构。</p>
+<ul>
+<li><strong>散列表 (Hash)</strong></li>
+</ul>
+<p>散列表源自于<a href="https://baike.baidu.com/item/散列函数/2366288" target="_blank" rel="noopener">散列函数</a>(Hash function)，其思想是如果在结构中存在关键字和T相等的记录，那么必定在F(T)的存储位置可以找到该记录，这样就可以不用进行比较操作而直接取得所查记录。</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>算法就是描述解决问题的方法, 人们在实际开发中会遇到很多的问题, 解决问题的方法也是千变万化。每个人对问题的解决方案都是不一样的, 不同的算法可能用不同的时间、空间或效率来完成同样的任务, 一个算法的优劣可以用 <code>空间复杂度</code> 与 <code>时间复杂度</code> 来衡量。</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>一个算法必须具备下面的几个基本特性:</p>
+<ul>
+<li><strong>输入输出</strong></li>
+</ul>
+<p>输入用来获取对象的已知条件, 输出用来反映算法执行后的结果。一个算法可以有 0 个输入(算法本身定出了初始条件), 但是不可以没有输出, 没有输出的算法是毫无意义的。</p>
+<ul>
+<li><strong>有穷性</strong></li>
+</ul>
+<p>指算法在执行有限的步骤之后自动结束, 而不是无限执行下去。</p>
+<ul>
+<li><strong>确定性</strong></li>
+</ul>
+<p>算法的每一步都具有确定的含义, 需要保证算法的相同条件下只有一条执行路径, 相同的输入只能有唯一的输出结果</p>
+<ul>
+<li><strong>可行性</strong></li>
+</ul>
+<p>也称为有效性, 一个算法是可行的, 即算法中描述的操作都是通过已经实现的基本运算执行有限次来实现的。</p>
+<h3 id="设计要求"><a href="#设计要求" class="headerlink" title="设计要求"></a>设计要求</h3><p>在不考虑效率的情况下, 一个合格的算法必须满足下面的三个条件:</p>
+<ul>
+<li><strong>正确性</strong></li>
+</ul>
+<p>算法的正确性是评价一个算法优劣的最重要的标准。</p>
+<ul>
+<li><strong>可读性</strong></li>
+</ul>
+<p>可读性是指一个算法可供人们阅读的容易程度, 可读性高有助于人们理解算法; 晦涩难懂的算法往往很难调试和修改。</p>
+<blockquote>
+<p>注意: 代码越少, 越牛逼!!! 这种想法是不可取的, 如今团队协作的今天, 不再是个人英雄主义的时代, 我觉得能让人更容易读懂才是关键。</p>
+<p>( 所以, 能加注释的顺手加上吧, 队友很难受的。)</p>
+</blockquote>
+<ul>
+<li><strong>健壮性</strong></li>
+</ul>
+<p>健壮性是值一个算法对不合理数据输入的反应能力和处理能力, 也成为 <strong>容错性</strong> 。</p>
+<ul>
+<li><strong>时间效率和存储效率</strong></li>
+</ul>
+<p>这里就是下面要说到的 <em>时间复杂度 与 空间复杂度</em> ,  在保证上面的一切的同时, 还要尽可能的提升算法的 执行效率 和 资源占用情况。    </p>
+<h3 id="效率度量"><a href="#效率度量" class="headerlink" title="效率度量"></a>效率度量</h3><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><h5 id="1-时间复杂度定义"><a href="#1-时间复杂度定义" class="headerlink" title="1. 时间复杂度定义"></a>1. 时间复杂度定义</h5><p>在进行算法分析时, 语句的总执行次数 T(n) 是关于问题规模 n 的函数, 进而分析T(n)随着n变化情况并确定T(n)的数量级, 算法的时间复杂度, 也就是算法的时间量度 </p>
+<center>T(n) = O(f(n))</center>
+他表示随着问题的规模 n 的增大, 算法执行时间的增长率和 f(n) 的增长率相同, 成为算法的**渐进时间复杂度**, 简称**时间复杂度**。(*这种使用 O( ) 来体现算法时间复杂度的记法, 我们称之为大O表示法。*)
+
+<h5 id="2-大-O-表示法"><a href="#2-大-O-表示法" class="headerlink" title="2. 大 O 表示法"></a>2. 大 O 表示法</h5><ul>
+<li>大 O 表示法规则</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;*大O表示法</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> 1. 用常数1取代运行时间中所有常数 3-&gt;1 O(1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> 2. 在修改运行次数函数中,只保留最高阶项 n^3+2n^2+5 -&gt; O(n^3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> 3. 如果在最高阶存在且不等于1,则去除这个项目相乘的常数 2n^3 -&gt; n^3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"> *&#x2F;</span></pre></td></tr></table></figure>
+
+<ul>
+<li>使用大 O 表示法计算时间复杂度</li>
+</ul>
+<blockquote>
+<p>时间复杂度总共可以分为: 常数阶, 线性阶, 平方阶, 对数阶, 立方阶, nlog阶, 指数阶</p>
+<p>指数阶目前不考虑, 因为如果n增大以后, 时间复杂度会噩梦般的增长, 有点不切实际</p>
+</blockquote>
+<ol>
+<li>常数阶</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1 + 1 + 1 = 3  O(1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> test1(<span class="keyword">int</span> n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;                <span class="comment">//执行1次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    sum = (<span class="number">1</span>+n)*n/<span class="number">2</span>;            <span class="comment">//执行1次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    printf(<span class="string">"testSum1:%d\n"</span>,sum);<span class="comment">//执行1次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不管传进来的 n 为多少, 程序执行的代码都是固定的, 所以时间复杂度为常数阶, O(1)</span></span></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>线性阶</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 执行 n 次  x &#x3D; x+1;  O(n)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">void test2(int x,int n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    for (int i &#x3D; 0; i &lt; n; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        x &#x3D; x+1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 根据传进来的 n 的值成 n 倍数增长, 时间复杂度为 O(n)</span></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>对数阶</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 2的x次方等于n x &#x3D; log2n  -&gt;O(logn) ...(log2n 里的 2为下标)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">void test3(int n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    int count &#x3D; 1;         &#x2F;&#x2F;执行1次</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    while (count &lt; n) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        count &#x3D; count * 2;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;</span></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>平方阶</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;x&#x3D;x+1; 执行n*n次 -&gt;O(n^2)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">void test4(int x,int n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    for (int i &#x3D; 0; i&lt; n; i++) &#123; &#x2F;&#x2F; n</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        for (int j &#x3D; 0; j &lt; n ; j++) &#123; &#x2F;&#x2F; n * n</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            x&#x3D;x+1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>立方阶</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1+n+(n*n)+(n*n*n)+(n*n*n) &#x3D; 1+n+n^2+2n^3 -&gt; O(n^3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">void test5(int n)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    int sum &#x3D; 1;                         &#x2F;&#x2F;执行1次</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    for (int i &#x3D; 0; i &lt; n; i++) &#123;        &#x2F;&#x2F;执行n次</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        for (int j &#x3D; 0 ; j &lt; n; j++) &#123;   &#x2F;&#x2F;执行n*n次</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            for (int k &#x3D; 0; k &lt; n; k++) &#123;&#x2F;&#x2F;执行n*n*n次</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                sum &#x3D; sum * 2;          &#x2F;&#x2F;执行n*n*n次</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 程序存储空间计算因素:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;*</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> 		1. 寄存本身的指令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> 		2. 常数</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"> 		3. 变量</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> 		4. 输入</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"> 		5. 对数据进行操作的辅助空间</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">*&#x2F;</span></pre></td></tr></table></figure>
+
+<p>算法的空间复杂度通过计算算法所需的存储空间实现, 算法空间复杂度的计算公式为:</p>
+<center>S(n) = n(f(n))</center>
+一般情况下, 程序在机器上执行时除了需要寄存本身的指令, 数据等之外, 还需要一些执行数据操作的辅助存储空间。在考量算法的空间复杂度上，主要考虑算法执行时所需要的辅助空间。
+
+<p>下面通过两个例子来看一下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 问题: 将一维数组a中的n个数逆序存放在原数组中.</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">int temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    for(int i &#x3D; 0; i &lt; n&#x2F;2 ; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        temp &#x3D; a[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        a[i] &#x3D; a[n-i-1];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        a[n-i-1] &#x3D; temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    for(int i &#x3D; 0;i &lt; 10;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        printf(&quot;%d\n&quot;,a[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 2</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">int b[10] &#x3D; &#123;0&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    for(int i &#x3D; 0; i &lt; n;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        b[i] &#x3D; a[n-i-1];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    for(int i &#x3D; 0; i &lt; n; i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        a[i] &#x3D; b[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    for(int i &#x3D; 0;i &lt; 10;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        printf(&quot;%d\n&quot;,a[i]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+
+<ol>
+<li>算法1声明了一个临时变量 <code>temp</code> , 借助 <code>temp</code> 解决问题, 与 <code>n</code> 的大小没有关系, 所以他的空间复杂度为 <strong>O(1)</strong> 。</li>
+<li>算法2 借助了一个大小为 <code>n</code> 的辅助数组, 所以他的空间复杂度为 <strong>O(n)</strong> 。</li>
+</ol>
+<blockquote>
+<p><strong>注意: 空间复杂度不是整个算法内存占用空间大小, 而是指在算法实现时需要开辟出的辅助空间占用的大小</strong></p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了关于 数据结构 和 算法 的一些定义, 主要是一些文字性的叙述, 所以有些地方可能表达的不是很准确。如果有不对的地方或者不是很明白的地方, 欢迎进行提问和指出。这里也算是对 数据结构 和 算法 学习的一个开始, 以后会陆续增加更多内容。</p>
+<p><em>和谐学习, 不急不躁 ~</em></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    M了个C
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yoursite.com/2020-04-01-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" title="数据结构与算法--基础概念">https://yoursite.com/2020-04-01-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020-03-25-iOS%E6%8E%A2%E7%B4%A2--%E7%B1%BB%E7%9A%84%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90(%E4%BA%8C)/" rel="next" title="iOS探索--类的结构分析(二)">
+                <i class="fa fa-chevron-left"></i> iOS探索--类的结构分析(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020-04-04-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%A1%BA%E5%BA%8F%E8%A1%A8/" rel="prev" title="数据结构与算法--顺序表">
+                数据结构与算法--顺序表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="M了个C" />
+            
+              <p class="site-author-name" itemprop="name">M了个C</p>
+              <p class="site-description motion-element" itemprop="description">Be a better yourself</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives%7C%7Carchive">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yujialel" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:745076972@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/dujiaoxi/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/6067369472/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本概念"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-相关术语"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 相关术语</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑结构"><span class="nav-number">1.2.</span> <span class="nav-text">逻辑结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-集合结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 集合结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-线性结构"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 线性结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-树形结构"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 树形结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-图形结构"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 图形结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理结构"><span class="nav-number">1.3.</span> <span class="nav-text">物理结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-顺序存储结构"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 顺序存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-链式存储结构"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 链式存储结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的数据结构"><span class="nav-number">1.4.</span> <span class="nav-text">常用的数据结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">2.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特性"><span class="nav-number">2.1.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计要求"><span class="nav-number">2.2.</span> <span class="nav-text">设计要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效率度量"><span class="nav-number">2.3.</span> <span class="nav-text">效率度量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间复杂度"><span class="nav-number">2.3.1.</span> <span class="nav-text">时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-时间复杂度定义"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">1. 时间复杂度定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-大-O-表示法"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">2. 大 O 表示法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空间复杂度"><span class="nav-number">2.3.2.</span> <span class="nav-text">空间复杂度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">M了个C</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">54k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'k0PQsHs5LYiEDkcfX3Qik9sq-9Nh9j0Va',
+        appKey: 'N6Xx5wyp4GNqrWpKuq1q58lf',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("k0PQsHs5LYiEDkcfX3Qik9sq-9Nh9j0Va", "N6Xx5wyp4GNqrWpKuq1q58lf");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
