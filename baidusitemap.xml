@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://yoursite.com/2020-07-02-OpenGL%E5%AD%A6%E4%B9%A0--%E5%9B%BE%E5%BD%A2API%E7%AE%80%E4%BB%8B/</loc>
+    <lastmod>2020-07-02</lastmod>
+  </url>  <url>
     <loc>https://yoursite.com/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2020-07-01</lastmod>
   </url>  <url>
@@ -58,10 +61,10 @@
     <loc>https://yoursite.com/2016-12-20-CocoaPod_Use/</loc>
     <lastmod>2019-12-03</lastmod>
   </url>  <url>
-    <loc>https://yoursite.com/2016-11-20-MarkdownTool/</loc>
+    <loc>https://yoursite.com/2017-01-13-GitTutorial/</loc>
     <lastmod>2019-12-03</lastmod>
   </url>  <url>
-    <loc>https://yoursite.com/2017-01-13-GitTutorial/</loc>
+    <loc>https://yoursite.com/2016-11-20-MarkdownTool/</loc>
     <lastmod>2019-12-03</lastmod>
   </url>  <url>
     <loc>https://yoursite.com/2017-05-04-iOS%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93_%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
