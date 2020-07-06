@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yoursite.com/2020-07-02-OpenGL%E5%AD%A6%E4%B9%A0--%E5%9B%BE%E5%BD%A2API%E7%AE%80%E4%BB%8B/</loc>
+    <loc>https://yoursite.com/2020-07-02-OpenGL--%E5%9B%BE%E5%BD%A2API%E7%AE%80%E4%BB%8B/</loc>
     
-    <lastmod>2020-07-02T13:07:29.441Z</lastmod>
+    <lastmod>2020-07-06T09:16:16.603Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://yoursite.com/2020-07-02-OpenGL--%E7%9B%B8%E5%85%B3%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/</loc>
+    
+    <lastmod>2020-07-06T08:13:51.517Z</lastmod>
     
   </url>
   
@@ -163,14 +170,14 @@
   </url>
   
   <url>
-    <loc>https://yoursite.com/2017-01-13-GitTutorial/</loc>
+    <loc>https://yoursite.com/2016-11-20-MarkdownTool/</loc>
     
     <lastmod>2019-12-03T03:21:54.209Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://yoursite.com/2016-11-20-MarkdownTool/</loc>
+    <loc>https://yoursite.com/2017-01-13-GitTutorial/</loc>
     
     <lastmod>2019-12-03T03:21:54.209Z</lastmod>
     
