@@ -318,6 +318,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="name" content="M了个C">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="M了个Cの播客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/" itemprop="url">iOS 探索--离屏渲染</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-14T00:00:00+08:00">
+                2020-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E8%A7%89/" itemprop="url" rel="index">
+                    <span itemprop="name">视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/" class="leancloud_visitors" data-flag-title="iOS 探索--离屏渲染">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          定义
+离屏渲染的大概过程
+如果在屏幕上显示内容, 这时候至少需要一块与屏幕像素数据量一样大的 frame buffer 来作为数据存储区域 (GPU 渲染结果存储的地方)。但是此时出现了特殊情况倒追渲染结果无法直接写入 frame buffer, 而是需要先暂存到另外的区域进行处理, 之后再写入到 frame buffer, 这种情况就称之为 **离屏渲染**。
+
+检测离屏渲染
+
+模拟器 可以通过设置 Debug -&gt; Color Off-screen Rendered 来打开离屏渲染检测
+真机 则通过设置 Debug -&gt; View Debugging -&gt; Renderi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="https://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-07-08-OpenGL--%E6%A1%88%E4%BE%8B1-%E7%BB%98%E5%88%B6%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -1503,206 +1700,6 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
-      <meta itemprop="name" content="M了个C">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
-      <meta itemprop="name" content="M了个Cの播客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url">Flutter 安装与环境搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-11T00:00:00+08:00">
-                2020-04-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Flutter/" itemprop="url" rel="index">
-                    <span itemprop="name">Flutter</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="leancloud_visitors" data-flag-title="Flutter 安装与环境搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一. Flutter 安装1. 下载 Flutter SDK① 可以选择去 官网 下载
-
-
-
-
-进入官网, 右上角选择 “Get started”, 然后在后面的页面选择自己需要的版本, 我这里使用的 “macOS”, 包括后面的问题也都是针对 Mac 系统的。这种方式存在一个问题, 就是国内网络可能会比较慢, 下面通过另外一种方式去获取 SDK。
-② 网上去找国内的一些镜像文件下载
-关于镜像有很多地方去找, 我这里选择的是 清华大学开源软件镜像 去下载的, 打开镜像地址, 然后直接搜索 “flutter” 就可以看到要找的镜像了
-
-
-这里的第一个就是我们需要的镜像, 然后点击后面的问号可以查
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="https://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-04-11-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E4%B8%8E%E5%8D%95%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8(%E4%BA%8C)/">
 
     <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -2094,7 +2091,7 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-04-04-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%A1%BA%E5%BA%8F%E8%A1%A8/">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
       <meta itemprop="name" content="M了个C">
@@ -2113,7 +2110,7 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020-04-04-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%A1%BA%E5%BA%8F%E8%A1%A8/" itemprop="url">数据结构与算法--顺序表</a></h1>
+                <a class="post-title-link" href="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url">Flutter 安装与环境搭建</a></h1>
         
 
         <div class="post-meta">
@@ -2125,8 +2122,8 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-04T00:00:00+08:00">
-                2020-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-11T00:00:00+08:00">
+                2020-04-11
               </time>
             
 
@@ -2148,8 +2145,8 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
               
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -2166,8 +2163,8 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020-04-04-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%A1%BA%E5%BA%8F%E8%A1%A8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020-04-04-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%A1%BA%E5%BA%8F%E8%A1%A8/" itemprop="commentCount"></span>
+                <a href="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2175,7 +2172,7 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
 
           
           
-             <span id="/2020-04-04-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%A1%BA%E5%BA%8F%E8%A1%A8/" class="leancloud_visitors" data-flag-title="数据结构与算法--顺序表">
+             <span id="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="leancloud_visitors" data-flag-title="Flutter 安装与环境搭建">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2200,7 +2197,7 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.3k
+                  1k
                 </span>
               
 
@@ -2227,19 +2224,21 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
       
         
           
-          
-前面一篇文章主要介绍了数据结构和算法的一些基本概念, 从这篇文章开始进行对数据结构的展开分析。从前面我们了解到数据结构主要研究的是数据的 逻辑结构 和 物理结构 以及他们之间的关系,  接下来我们就展开来研究一下不同的结构和关系下产生的各种数据结构。
+          一. Flutter 安装1. 下载 Flutter SDK① 可以选择去 官网 下载
 
-线性表定义线性表是最基本、最简单、也是最常用的一种数据结构, 一个线性表是 n 个具有相同特性的数据元素的有限序列。
 
- 举个例子来说明一下:
 
-假如我们这里有一张学生表, 表里面存储的每一个学生都是一个数据元素, 每一个数据元素都包含诸如 姓名、年龄、性别等数据项。
-这张表里的各个学生就是不同的数据元素, 但是组成学生的各个数据项是相同的(
+
+进入官网, 右上角选择 “Get started”, 然后在后面的页面选择自己需要的版本, 我这里使用的 “macOS”, 包括后面的问题也都是针对 Mac 系统的。这种方式存在一个问题, 就是国内网络可能会比较慢, 下面通过另外一种方式去获取 SDK。
+② 网上去找国内的一些镜像文件下载
+关于镜像有很多地方去找, 我这里选择的是 清华大学开源软件镜像 去下载的, 打开镜像地址, 然后直接搜索 “flutter” 就可以看到要找的镜像了
+
+
+这里的第一个就是我们需要的镜像, 然后点击后面的问号可以查
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020-04-04-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%A1%BA%E5%BA%8F%E8%A1%A8/#more" rel="contents">
+            <a class="btn" href="/2020-05-26-Flutter%20%E5%AE%89%E8%A3%85%E5%92%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2333,7 +2332,7 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
               
                 <a href="/archives%7C%7Carchive">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2441,7 +2440,7 @@ OpenGL 的函数不管在 哪个语言环境中, 都是类似 C 语言 一样的
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">66k</span>
+    <span title="Site words total count">68k</span>
   
 </div>
 

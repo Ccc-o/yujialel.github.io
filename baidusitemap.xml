@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://yoursite.com/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/</loc>
+    <lastmod>2020-07-15</lastmod>
+  </url>  <url>
     <loc>https://yoursite.com/2020-07-02-OpenGL--%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2020-07-09</lastmod>
   </url>  <url>
@@ -73,10 +76,10 @@
     <loc>https://yoursite.com/2016-12-20-CocoaPod_Use/</loc>
     <lastmod>2019-12-03</lastmod>
   </url>  <url>
-    <loc>https://yoursite.com/2017-05-04-iOS%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93_%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
+    <loc>https://yoursite.com/2017-01-13-GitTutorial/</loc>
     <lastmod>2019-12-03</lastmod>
   </url>  <url>
-    <loc>https://yoursite.com/2017-01-13-GitTutorial/</loc>
+    <loc>https://yoursite.com/2017-05-04-iOS%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93_%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
     <lastmod>2019-12-03</lastmod>
   </url>  <url>
     <loc>https://yoursite.com/2016-11-20-MarkdownTool/</loc>

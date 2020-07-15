@@ -80,7 +80,7 @@
 
 
 
-  <meta name="keywords" content="工具," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -93,16 +93,22 @@
 
 
 
-<meta name="description" content="工欲善其事必先利其器，选择一些好的工具可以成吨的提高自己的工作效率。 个人开发常用工具的收集 cmd Markdown 作业部落出版的Markdown编辑器        RESTClient 一个开源的客户端HTTP调试工具。     lantern 蓝灯,一款开源的翻墙工具。     Charles 青花瓷, 一款HTTP&#x2F;HTTPS的抓包工具。 Charles 从入门到精通     Subl">
-<meta name="keywords" content="工具">
+<meta name="description" content="定义 离屏渲染的大概过程 如果在屏幕上显示内容, 这时候至少需要一块与屏幕像素数据量一样大的 frame buffer 来作为数据存储区域 (GPU 渲染结果存储的地方)。但是此时出现了特殊情况倒追渲染结果无法直接写入 frame buffer, 而是需要先暂存到另外的区域进行处理, 之后再写入到 frame buffer, 这种情况就称之为 **离屏渲染**。  检测离屏渲染  模拟器 可以通过">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开发常用工具">
-<meta property="og:url" content="https:&#x2F;&#x2F;yoursite.com&#x2F;2016-12-12-Develop_Tool&#x2F;index.html">
+<meta property="og:title" content="iOS 探索--离屏渲染">
+<meta property="og:url" content="https:&#x2F;&#x2F;yoursite.com&#x2F;2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93&#x2F;index.html">
 <meta property="og:site_name" content="M了个Cの播客">
-<meta property="og:description" content="工欲善其事必先利其器，选择一些好的工具可以成吨的提高自己的工作效率。 个人开发常用工具的收集 cmd Markdown 作业部落出版的Markdown编辑器        RESTClient 一个开源的客户端HTTP调试工具。     lantern 蓝灯,一款开源的翻墙工具。     Charles 青花瓷, 一款HTTP&#x2F;HTTPS的抓包工具。 Charles 从入门到精通     Subl">
+<meta property="og:description" content="定义 离屏渲染的大概过程 如果在屏幕上显示内容, 这时候至少需要一块与屏幕像素数据量一样大的 frame buffer 来作为数据存储区域 (GPU 渲染结果存储的地方)。但是此时出现了特殊情况倒追渲染结果无法直接写入 frame buffer, 而是需要先暂存到另外的区域进行处理, 之后再写入到 frame buffer, 这种情况就称之为 **离屏渲染**。  检测离屏渲染  模拟器 可以通过">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-18T05:09:57.539Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-5.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-6.png">
+<meta property="og:updated_time" content="2020-07-15T01:58:56.464Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-1.png">
 
 
 
@@ -132,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="https://yoursite.com/2016-12-12-Develop_Tool/"/>
+  <link rel="canonical" href="https://yoursite.com/2020-07-14-iOS-探索--离屏渲染/"/>
 
 
 
 
 
-  <title>开发常用工具 | M了个Cの播客</title>
+  <title>iOS 探索--离屏渲染 | M了个Cの播客</title>
   
 
 
@@ -319,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2016-12-12-Develop_Tool/">
+    <link itemprop="mainEntityOfPage" href="https://yoursite.com/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/">
 
     <span hidden itemprop="author" itemscope itemtype="https://schema.org/Person">
       <meta itemprop="name" content="M了个C">
@@ -336,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">开发常用工具</h1>
+          <h1 class="post-title" itemprop="name headline">iOS 探索--离屏渲染</h1>
         
 
         <div class="post-meta">
@@ -348,8 +354,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-12T00:00:00+08:00">
-                2016-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-14T00:00:00+08:00">
+                2020-07-14
               </time>
             
 
@@ -371,8 +377,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/%E8%A7%86%E8%A7%89/" itemprop="url" rel="index">
+                    <span itemprop="name">视觉</span>
                   </a>
                 </span>
 
@@ -389,8 +395,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016-12-12-Develop_Tool/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016-12-12-Develop_Tool/" itemprop="commentCount"></span>
+                <a href="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -398,7 +404,7 @@
 
           
           
-             <span id="/2016-12-12-Develop_Tool/" class="leancloud_visitors" data-flag-title="开发常用工具">
+             <span id="/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/" class="leancloud_visitors" data-flag-title="iOS 探索--离屏渲染">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -423,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  407
+                  1.9k
                 </span>
               
 
@@ -448,32 +454,107 @@
       
 
       
-        <p>工欲善其事必先利其器，选择一些好的工具可以成吨的提高自己的工作效率。</p>
-<h3 id="个人开发常用工具的收集"><a href="#个人开发常用工具的收集" class="headerlink" title="个人开发常用工具的收集"></a>个人开发常用工具的收集</h3><ul>
-<li><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="noopener">cmd Markdown</a> 作业部落出版的Markdown编辑器       </li>
-<li><a href="https://github.com/rest-client/rest-client" target="_blank" rel="noopener">RESTClient</a> 一个开源的客户端HTTP调试工具。    </li>
-<li><a href="https://github.com/getlantern/lantern" target="_blank" rel="noopener">lantern</a> 蓝灯,一款开源的翻墙工具。    </li>
-<li><a href="https://www.charlesproxy.com/" target="_blank" rel="noopener">Charles</a> 青花瓷, 一款HTTP/HTTPS的抓包工具。<ul>
-<li><a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="noopener">Charles 从入门到精通</a>  </li>
-</ul>
-</li>
-<li><a href="http://www.sublimetext.com" target="_blank" rel="noopener">Sublime</a> 一款强大的IDE,支持Python、JS、JSON格式化等等…更重要的是<code>Sublime</code>支持的插件很多。  <ul>
-<li><a href="http://www.xuanfengge.com/practical-collection-of-sublime-plug-in.html" target="_blank" rel="noopener">实用的sublime插件集合</a>     </li>
-</ul>
-</li>
-</ul>
-<h3 id="文章配图网站"><a href="#文章配图网站" class="headerlink" title="文章配图网站"></a>文章配图网站</h3><p>还在为文章配图而苦恼吗？点击店面的网站吧，各种各样的图片帮你丰富你的文章。</p>
-<p><a href="http://www.gratisography.com/" target="_blank" rel="noopener">Gratisography</a> gratisography 里面的图片每周都会更新，很多时尚流行的照片在里面，并且适合用在设计项目上。</p>
-<p><a href="http://www.ssyer.com/home-index.html" target="_blank" rel="noopener">ssyer</a>国内的网站，不需要翻墙，速度很快，图片最全。完全免费的图片库。</p>
-<p><a href="https://pixabay.com/" target="_blank" rel="noopener">Pixabay</a> 不同类型的高清摄影照片。</p>
-<h3 id="UI设计网站"><a href="#UI设计网站" class="headerlink" title="UI设计网站"></a>UI设计网站</h3><p>作为一个开发者，自己写些小程序的时候经常会为没有UI而烦恼，下面就是一些UI设计网站，有新颖的UI界面设计，也有单独的UI元素，icon等。</p>
-<p><a href="http://www.ui.cn/" target="_blank" rel="noopener">UI中国</a> 国内潮流的UI设计作品。</p>
-<p><a href="http://www.webdesigndev.com/" target="_blank" rel="noopener">webdesigndev</a> 国外网站设计文章，各种各样的资料看到你眼花缭乱。</p>
-<p><a href="https://dribbble.com/" target="_blank" rel="noopener">dribbble</a> 接触过设计的应该都知道，一个很好的UI设计平台。</p>
-<p><a href="http://www.flaticon.com/" target="_blank" rel="noopener">flaticon</a> 各种icon的设计，一定有你想想要的。</p>
-<br>
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p><img src="/images/%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-1.png" alt></p>
+<center>离屏渲染的大概过程</center>
+如果在屏幕上显示内容, 这时候至少需要一块与屏幕像素数据量一样大的 frame buffer 来作为数据存储区域 (GPU 渲染结果存储的地方)。但是此时出现了特殊情况倒追渲染结果无法直接写入 frame buffer, 而是需要先暂存到另外的区域进行处理, 之后再写入到 frame buffer, 这种情况就称之为 **离屏渲染**。
 
-<p>转载请注明：<a href="https://yujialel.github.io" target="_blank" rel="noopener">M了个C的博客</a> » <a href="https://yujialel.github.io/2016/04/Develop_Tool/" target="_blank" rel="noopener">点击阅读原文</a></p>
+<h1 id="检测离屏渲染"><a href="#检测离屏渲染" class="headerlink" title="检测离屏渲染"></a>检测离屏渲染</h1><p><img src="/images/%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-2.png" alt></p>
+<ul>
+<li><strong>模拟器</strong> 可以通过设置 Debug -&gt; Color Off-screen Rendered 来打开离屏渲染检测</li>
+<li><strong>真机</strong> 则通过设置 Debug -&gt; View Debugging -&gt; Rendering -&gt; Color Off-screen Rendered 来打开离屏渲染检测</li>
+<li>具体情况如上图那样, 图中的颜色呈现 <strong>黄色</strong> 的区域就是触发了 <strong>离屏渲染</strong> 的区域</li>
+</ul>
+<h1 id="离屏渲染分析"><a href="#离屏渲染分析" class="headerlink" title="离屏渲染分析"></a>离屏渲染分析</h1><h2 id="渲染流程分析"><a href="#渲染流程分析" class="headerlink" title="渲染流程分析"></a>渲染流程分析</h2><p>接下来我们先一起看 2张 图来看一下整个的 渲染流程:</p>
+<ol>
+<li>通常情况下的渲染通道流程</li>
+</ol>
+<p><img src="/images/%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-3.png" alt></p>
+<center>通常渲染流程</center>
+2. Offscreen Render的渲染通道流程
+![](/images/离屏渲染-4.png)
+
+
+<center>离屏渲染流程</center>
+* 在一般情况下 OpenGL 会讲应用提交到 `Render Server` 的动画直接进行渲染显示。(图 1)
+
+<ul>
+<li><p>但是对于一些较复杂的动画的渲染并不能直接渲染叠加显示, 而是需要根据 <code>Command Buffer</code> 分通道进行渲染之后再组合。(图 2)</p>
+</li>
+<li><p>对比上面的 2 个流程图, 可以看到后面的渲染需要更多的渲染通道和合并的步骤。</p>
+</li>
+<li><p>相比之下 Offscreen Render 需要更多的渲染通道, 且多个渲染通道间切换肯定会消耗一定的时间, 当通道达到一定的数量, 对性能必然造成影响</p>
+</li>
+</ul>
+<h2 id="为什么会产生离屏渲染"><a href="#为什么会产生离屏渲染" class="headerlink" title="为什么会产生离屏渲染?"></a>为什么会产生离屏渲染?</h2><p>正常的情况下, OpenGL 提交一个命令到 <code>Command Buffer</code> , 随后 GPU 就开始渲染, 最后将渲染结果放到 <code>Render Buffer</code> 中。</p>
+<p>这里如果想要绘制一个带有圆角并剪切圆角的容器 (maskToBounds 为 YES, 背景色不是透明, 具体可以看下面的例子 1), 就可能触发离屏渲染。</p>
+<blockquote>
+<ol>
+<li>首先将 layer 的内容裁剪成圆角</li>
+<li>容器的子控件在渲染的过程中, 因为父 layer 是被裁剪过的, 那么也需要被裁剪; 但是这时的 父 layer 已经被渲染完成而子 layer 还在队列中, 没有办法进行统一裁剪, 所以这个过程就没办法实现了</li>
+</ol>
+</blockquote>
+<p>所以系统就不得不去 开辟独立于 <code>frame buffer</code> 的内存, 先把父 layer 以及他的子 layer依次画好, 然后合并到一起进行裁剪, 再把结果放到 <code>frame buffer</code> 中, 这就是为什么需要离屏渲染。</p>
+<p>可能不是很好理解, 那么接下来再结合几个案例看一下吧~</p>
+<blockquote>
+<p><em>注: 以上内容如果有不同观点欢迎指出~</em></p>
+</blockquote>
+<h1 id="离屏渲染案例"><a href="#离屏渲染案例" class="headerlink" title="离屏渲染案例"></a>离屏渲染案例</h1><h2 id="1-cornerRadius-maskToBounds"><a href="#1-cornerRadius-maskToBounds" class="headerlink" title="1. cornerRadius + maskToBounds"></a>1. cornerRadius + maskToBounds</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;UIImageView 设置了图片+背景色;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">UIImageView *img1 &#x3D; [[UIImageView alloc]init];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">img1.frame &#x3D; CGRectMake(100, 320, 100, 100);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">img1.backgroundColor &#x3D; [UIColor blueColor];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">[self.view addSubview:img1];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">img1.layer.cornerRadius &#x3D; 50;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">img1.layer.masksToBounds &#x3D; YES;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">img1.image &#x3D; [UIImage imageNamed:@&quot;btn.jpeg&quot;];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;UIImageView 只设置了图片,无背景色;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">UIImageView *img2 &#x3D; [[UIImageView alloc]init];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">img2.frame &#x3D; CGRectMake(100, 480, 100, 100);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">[self.view addSubview:img2];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">img2.layer.cornerRadius &#x3D; 50;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">img2.layer.masksToBounds &#x3D; YES;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">img2.image &#x3D; [UIImage imageNamed:@&quot;btn.jpeg&quot;];</span></pre></td></tr></table></figure>
+
+<p>执行结果:</p>
+<p><img src="/images/%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-5.png" alt></p>
+<ol>
+<li>(图 1) 设置了 圆角+maskToBounds, 然后设置了背景颜色, 发现产生了离屏渲染, 这个就是我们上面所举的例子</li>
+<li>(图 2) 设置了 圆角+maskToBounds, 背景色为透明, 没有发生离屏渲染。这是因为苹果在 iOS 9 之后进行的优化, 假如我们只设置 <code>UIImageView</code>的<code>image</code> , 并加上圆角+裁剪，是不会产生离屏渲染的。但如果加上了背景色、边框或其他有图像内容的图层，还是会产生离屏渲染。</li>
+<li>所以并不是 圆角+maskToBounds 必定会产生离屏渲染</li>
+</ol>
+<blockquote>
+<p>关于 iOS 9 的优化后</p>
+<p>可以理解为，因为只有 <strong>单层</strong> 内容需要添加圆角和裁切，所以可以不需要用到离屏渲染技术。但如果加上了背景色、边框或其他有图像内容的图层，就会产生为 <strong>多层</strong> 添加圆角和裁切，所以还是会触发离屏渲染。</p>
+</blockquote>
+<h2 id="2-mask-layer"><a href="#2-mask-layer" class="headerlink" title="2. mask.layer"></a>2. mask.layer</h2><p><img src="/images/%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93-6.png" alt></p>
+<center>mask</center>
+我们知道mask是应用在layer和其所有子layer的组合之上的，而且可能带有透明度，不得不在离屏渲染中完成。
+
+<blockquote>
+<ol>
+<li>系统先计算好mask部分，然后保存到离屏缓冲区</li>
+<li>计算layer部分，计算好之后保存到离屏缓冲区</li>
+<li>对mask和layer进行合并剪裁计算，最后结果提交到FrameBuffer，展示到屏幕上</li>
+</ol>
+</blockquote>
+<h2 id="3-其它会产生离屏渲染的情况"><a href="#3-其它会产生离屏渲染的情况" class="headerlink" title="3. 其它会产生离屏渲染的情况"></a>3. 其它会产生离屏渲染的情况</h2><p>关于离屏渲染还有很多种情况, 这里不一一赘述了, 感兴趣的可以去网上查找一下, 下面在列举几种会出现的情况:</p>
+<ol>
+<li><p>layer.shouldRasterize 光栅化</p>
+</li>
+<li><p>edge antialiasing（抗锯齿）</p>
+</li>
+<li><p>半透明视图混合时</p>
+</li>
+</ol>
+<h1 id="离屏渲染的优化"><a href="#离屏渲染的优化" class="headerlink" title="离屏渲染的优化"></a>离屏渲染的优化</h1><p><strong>1. 针对圆角、阴影效果等的方案</strong></p>
+<blockquote>
+<ol>
+<li>使用带圆角的图片</li>
+<li>使用贝塞尔曲线进行圆角绘制</li>
+<li>跟服务端讨论进行圆角处理</li>
+<li>当不存在短时间内需要反复多次大量复用的layer时，shouldRasterize设置为NO</li>
+</ol>
+</blockquote>
+<p><strong>2. 可复用时的优化方案</strong></p>
+<p>CALayer为这个方案提供了对应的解法：shouldRasterize。一旦被设置为true，Render Server就会强制把layer的渲染结果（包括其子layer，以及圆角、阴影、group opacity等等）保存在一块内存中，这样一来在下一帧仍然可以被复用，而不会再次触发离屏渲染。有几个需要注意的点：</p>
+<ul>
+<li>shouldRasterize的主旨在于<strong>降低性能损失，但总是至少会触发一次离屏渲染</strong>。如果你的layer本来并不复杂，也没有圆角阴影等等，打开这个开关反而会增加一次不必要的离屏渲染</li>
+<li>离屏渲染缓存有空间上限，最多不超过屏幕总像素的2.5倍大小</li>
+<li>一旦缓存超过100ms没有被使用，会自动被丢弃</li>
+<li>layer的内容（包括子layer）必须是静态的，因为一旦发生变化（如resize，动画），之前辛苦处理得到的缓存就失效了。如果这件事频繁发生，我们就又回到了“每一帧都需要离屏渲染”的情景，而这正是开发者需要极力避免的。针对这种情况，Xcode提供了“Color Hits Green and Misses Red”的选项，帮助我们查看缓存的使用是否符合预期</li>
+<li>其实除了解决多次离屏渲染的开销，shouldRasterize在另一个场景中也可以使用：如果layer的子结构非常复杂，渲染一次所需时间较长，同样可以打开这个开关，把layer绘制到一块缓存，然后在接下来复用这个结果，这样就不需要每次都重新绘制整个layer树了</li>
+</ul>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>以上就是本次的全部内容, 关于离屏渲染的东西可能不是很全面, 欢迎继续补充。另外, 后续可能还会继续补充一下关于 <code>Core Animation</code> 相关的知识, 感谢~</p>
+<p>和谐学习, 不急不躁~</p>
+<p>参考资料:</p>
+<p><a href="https://juejin.im/post/5f03dfe85188252e4c4ced6e#heading-10" target="_blank" rel="noopener">1. iOS离屏渲染</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/72653360" target="_blank" rel="noopener">2. 关于iOS离屏渲染的深入研究</a></p>
+<p><a href="https://www.jianshu.com/p/cff0d1b3c915" target="_blank" rel="noopener">3.iOS 关于离屏渲染的理解 以及解决方案</a></p>
 
       
     </div>
@@ -500,7 +581,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://yoursite.com/2016-12-12-Develop_Tool/" title="开发常用工具">https://yoursite.com/2016-12-12-Develop_Tool/</a>
+    <a href="https://yoursite.com/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/" title="iOS 探索--离屏渲染">https://yoursite.com/2020-07-14-iOS-%E6%8E%A2%E7%B4%A2--%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -515,7 +596,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+            <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
           
         </div>
       
@@ -528,8 +609,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016-11-20-MarkdownTool/" rel="next" title="Markdown工具集">
-                <i class="fa fa-chevron-left"></i> Markdown工具集
+              <a href="/2020-07-08-OpenGL--%E6%A1%88%E4%BE%8B1-%E7%BB%98%E5%88%B6%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2/" rel="next" title="OpenGL--案例1-绘制一个三角形">
+                <i class="fa fa-chevron-left"></i> OpenGL--案例1-绘制一个三角形
               </a>
             
           </div>
@@ -537,10 +618,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016-12-20-CocoaPod_Use/" rel="prev" title="CocoaPods使用心得">
-                CocoaPods使用心得 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -714,7 +791,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#个人开发常用工具的收集"><span class="nav-number">1.</span> <span class="nav-text">个人开发常用工具的收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章配图网站"><span class="nav-number">2.</span> <span class="nav-text">文章配图网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UI设计网站"><span class="nav-number">3.</span> <span class="nav-text">UI设计网站</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检测离屏渲染"><span class="nav-number">2.</span> <span class="nav-text">检测离屏渲染</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#离屏渲染分析"><span class="nav-number">3.</span> <span class="nav-text">离屏渲染分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染流程分析"><span class="nav-number">3.1.</span> <span class="nav-text">渲染流程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会产生离屏渲染"><span class="nav-number">3.2.</span> <span class="nav-text">为什么会产生离屏渲染?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#离屏渲染案例"><span class="nav-number">4.</span> <span class="nav-text">离屏渲染案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-cornerRadius-maskToBounds"><span class="nav-number">4.1.</span> <span class="nav-text">1. cornerRadius + maskToBounds</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-mask-layer"><span class="nav-number">4.2.</span> <span class="nav-text">2. mask.layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-其它会产生离屏渲染的情况"><span class="nav-number">4.3.</span> <span class="nav-text">3. 其它会产生离屏渲染的情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#离屏渲染的优化"><span class="nav-number">5.</span> <span class="nav-text">离屏渲染的优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
             
 
           </div>
